@@ -22,10 +22,10 @@ services:
         published: 67
         protocol: udp
       - target: 80
-        published: 80
+        published: 880
         protocol: tcp
       - target: 443
-        published: 443
+        published: 4443
         protocol: tcp
     environment:
       - "TZ=Europe/London"

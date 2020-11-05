@@ -1,0 +1,20 @@
+version: '3.3'
+services:
+    transmission-openvpn:
+        volumes:
+            - './data:/data'
+        environment:
+            - OPENVPN_PROVIDER=mullvad
+            - OPENVPN_USERNAME=
+            - OPENVPN_PASSWORD=pass
+            - WEBPROXY_ENABLED=false
+            - LOCAL_NETWORK=192.168.0.0/16
+        cap_add:
+            - NET_ADMIN
+        logging:
+            driver: json-file
+            options:
+                max-size: 10m
+        ports:
+            - '9091:9091'
+        image: haugene/transmission-openvpn
