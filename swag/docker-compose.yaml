@@ -1,0 +1,31 @@
+---
+version: "2.1"
+services:
+  swag:
+    image: linuxserver/swag
+    container_name: swag
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - URL=jsmth.co.uk
+      - SUBDOMAINS=airplanes,grafana,homeassistant,homeserver,pihole,transmission
+      - VALIDATION=dns
+      - DNSPLUGIN=route53 #optional
+      - ONLY_SUBDOMAINS=true #optional
+    volumes:
+      - /home/user/swag:/config
+    ports:
+      - 443:443
+      - 80:80 #optional
+    restart: unless-stopped
+  authelia:
+    image: authelia/authelia:4.21.0
+    container_name: authelia
+    environment:
+      - TZ=Europe/London
+    volumes:
+      - /home/user/authelia:/config
+    restart: unless-stopped

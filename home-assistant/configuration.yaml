@@ -1,0 +1,70 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+route53:
+  aws_access_key_id: 
+  aws_secret_access_key: 
+  zone: 
+  domain: jsmth.co.uk
+  records:
+    - airplanes
+    - calibre-web
+    - grafana
+    - homeassistant
+    - homeserver
+    - influx
+    - jellyfin
+    - pihole
+    - transmission
+
+notify:
+  - name: Slack
+    platform: slack
+    api_key: 
+    default_channel: '#home'
+
+hive:
+  username: 
+  password: 
+
+sensor:
+  - platform: mqtt
+    name: "Bedroom Temperature"
+    state_topic: "sensors/bedroom"
+    value_template: "{{ value_json.temperature }}"
+    unit_of_measurement: 'C'
+    device_class: "temperature"
+  - platform: mqtt
+    name: "Bedroom Pressure"
+    state_topic: "sensors/bedroom"
+    value_template: "{{ value_json.pressure }}"
+    device_class: "pressure"
+    unit_of_measurement: "hPa"
+  - platform: mqtt
+    name: "Other Room Temperature"
+    state_topic: "sensors/enviro"
+    value_template: "{{ value_json.temperature }}"
+    unit_of_measurement: 'C'
+    device_class: "temperature"
+  - platform: mqtt
+    name: "Other Room Pressure"
+    state_topic: "sensors/enviro"
+    value_template: "{{ value_json.pressure }}"
+    device_class: "pressure"
+    unit_of_measurement: "hPa"
+  - platform: mqtt
+    name: "Other Room Humidity"
+    state_topic: "sensors/enviro"
+    value_template: "{{ value_json.humidity }}"
+    device_class: "humidity"
+    unit_of_measurement: "%"    

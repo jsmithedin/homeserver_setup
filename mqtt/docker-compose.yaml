@@ -1,0 +1,22 @@
+version: "2"
+services:
+  telegraf:
+    container_name: telegraf
+    image: telegraf
+    network_mode: "host"
+    volumes:
+      - ./telegraf/conf/telegraf.conf:/etc/telegraf/telegraf.conf
+    restart: always
+
+  mqtt:
+    container_name: mqtt
+    image: eclipse-mosquitto:latest
+    user: "0"
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mqtt/conf/:/mosquitto/config/
+      - ./mqtt/data/:/mosquitto/data/
+      - ./mqtt/log/:/mosquitto/log/
+    restart: always

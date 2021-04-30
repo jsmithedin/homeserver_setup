@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  influxdb:
+    image: "influxdb:latest"
+    hostname: "monitoring_influxdb"
+    container_name: monitoring_influxdb
+    ports: 
+        - "8086:8086"
+    volumes:
+        - ./influx-data:/var/lib/influxdb
+        - ./influx-data2:/var/lib/influxdb2
+    networks:
+        - monitornet
+networks:
+    monitornet:

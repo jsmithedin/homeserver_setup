@@ -1,3 +1,0 @@
-[submodule "tick/docker-compose-influxdb-grafana"]
-	path = tick/docker-compose-influxdb-grafana
-	url = https://github.com/jkehres/docker-compose-influxdb-grafana.git
